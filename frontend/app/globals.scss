@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+    --bg: 25, 30, 35;
+    --fg: 35, 45, 50;
+    --accent: 60, 130, 240;
+
+    --shdw1: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    --shdw2: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    --shdw3: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    
+    --text: 255, 255, 255;
+    --link-hover: 255, 75, 75;
+}
+
+body {
+    margin: 0;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+}
+
+h1, h2 {
+    font-weight: 800;
+}
+h1, h2, h3, h4 {
+    margin: 1rem 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    height: 100vh;
+    margin: 0 15rem;
+
+    h1 {
+        margin: 0;
+        font-size: 5rem;
+    }
+
+    span {
+        opacity: 0.5;
+    }
+
+    .invite {
+        background-color: rgb(var(--accent));
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        
+
+        box-shadow: var(--shdw1);
+        border-radius: 15px;
+        padding: 1rem 2rem;
+        opacity: 0.75;
+
+        transition: 0.5s ease all;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shdw3);
+            opacity: 1;
+            border-radius: 10px;
+        }
+    }
+
+    .brands {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5rem;
+
+        .seperator {
+            height: 100%;
+            width: 1px;
+            background-color: rgb(var(--text));
+        }
+
+        .brand {
+            position: relative;
+            &.discord {
+                img {
+                    min-height: 50px;
+                    width: 10rem;
+                    height: auto;
+                }
+            }
+            &.lol {
+                img {
+                    min-height: 50px;
+                    width: 15rem;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
