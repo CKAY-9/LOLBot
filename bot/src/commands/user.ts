@@ -1,18 +1,18 @@
 // /profile - view a league profile
 
-// Discord.js Imports
 import { 
     CommandInteraction, 
     SlashCommandBuilder 
 } from "discord.js";
-
 import { Constants } from "twisted";
-import {
-    dragonIcon, 
-    leagueAPI 
-} from "../league";
+import { leagueAPI } from "../league";
 import { EmbedBuilder } from "@discordjs/builders";
-import { errorEmbed } from "../utils";
+import { 
+    dragonIcon,
+    errorEmbed, 
+    opGGLink, 
+    regionsToOption 
+} from "../utils";
 
 // Information for calling the command
 const commmandData = new SlashCommandBuilder()
@@ -23,61 +23,7 @@ const commmandData = new SlashCommandBuilder()
             .setDescription("The summoner name to search")
             .setRequired(true)
     })
-    .addStringOption((option) => {
-        return option.setName("region")
-            .setDescription("The region of the player account")
-            .addChoices(
-                {
-                    name: "Korea", 
-                    value: "KOREA",
-                },
-                {
-                    name: "Brazil",
-                    value: "BRAZIL",
-                },
-                {
-                    name: "NA",
-                    value: "AMERICA_NORTH"
-                },
-                {
-                    name: "EU West",
-                    value: "EU_WEST"
-                },
-                {
-                    name: "EU East",
-                    value: "EU_EAST"
-                },
-                {
-                    name: "Japan",
-                    value: "JAPAN"
-                },
-                {
-                    name: "Latin America North",
-                    value: "LAT_NORTH"
-                },
-                {
-                    name: "Latin America South",
-                    value: "LAT_SOUTH"
-                },
-                {
-                    name: "Oceania",
-                    value: "OCEANIA"
-                },
-                {
-                    name: "PBE",
-                    value: "PBE"
-                },
-                {
-                    name: "Russia",
-                    value: "RUSSIA"
-                },
-                {
-                    name: "Turkey",
-                    value: "TURKEY"
-                }
-            )
-            .setRequired(true)
-    });
+    .addStringOption((option) => {return regionsToOption(option)});
 
 // Command logic
 const execute = async (interaction: CommandInteraction) => {
@@ -86,11 +32,10 @@ const execute = async (interaction: CommandInteraction) => {
 
     try {
         const user = await leagueAPI.Summoner.getByName(summonerName.value as string, Constants.Regions[region.value as string]);
-        const opGGLink = `https://www.op.gg/summoners/${Constants.Regions[region.value as string]}/${user.response.name}`.replace(" ", "%20");
         const profileEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle(user.response.name)
-            .setURL(opGGLink)
+            .setURL(opGGLink(user.response.name, Constants.Regions[region.value as string]))
             .setAuthor({
                 name: "LoLBot", 
                 iconURL: interaction.client.user.avatarURL(),
@@ -99,10 +44,6 @@ const execute = async (interaction: CommandInteraction) => {
             .setDescription(`User Details for ${user.response.name}`)
             .setThumbnail(`${dragonIcon(user.response.profileIconId)}`)
             .addFields(
-                {
-                    name: "\u200B", 
-                    value: "\u200B"
-                },
                 {
                     name: "Summoner Name", 
                     value: user.response.name
