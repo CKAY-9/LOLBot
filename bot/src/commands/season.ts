@@ -4,7 +4,13 @@ import {
     EmbedBuilder, 
     SlashCommandBuilder 
 } from "discord.js";
-import { convertQueueToValue, dragonIcon, errorEmbed, opGGLink, regionsToOption } from "../utils";
+import { 
+    convertQueueToValue,
+    dragonIcon, 
+    errorEmbed, 
+    opGGLink, 
+    regionsToOption 
+} from "../utils";
 import { leagueAPI } from "../league";
 import { Constants } from "twisted";
 
@@ -28,10 +34,16 @@ const execute = async (interaction: CommandInteraction) => {
         
         let fieldInfo: APIEmbedField[] = [];
         if (ranks.response.length <= 0) {
-            fieldInfo.push({
-                name: `${user.response.name} is not ranked!`,
-                value: "This player has not been ranked this season :("
-            })
+            fieldInfo.push(
+                {
+                    name: `${user.response.name} is not ranked!`,
+                    value: "This player has not been ranked this season :("
+                },
+                {
+                    name: "\u200B", 
+                    value: "\u200B"
+                }
+            )
         } else {
             for (const queueType of ranks.response) {
                 fieldInfo.push(
@@ -70,6 +82,10 @@ const execute = async (interaction: CommandInteraction) => {
             })
             .setDescription(`The current ranked season for ${user.response.name}`)
             .setThumbnail(`${dragonIcon(user.response.profileIconId)}`)
+            .addFields(                    {
+                name: "\u200B", 
+                value: "\u200B"
+            })
             .addFields(fieldInfo)
             .setTimestamp()
             .setFooter({

@@ -63,6 +63,10 @@ const execute = async (interaction: CommandInteraction) => {
                 {
                     name: "Profile Icon ID", 
                     value: user.response.profileIconId.toString()
+                },
+                {
+                    name: "\u200B", 
+                    value: "\u200B"
                 }
             )
             .setTimestamp()

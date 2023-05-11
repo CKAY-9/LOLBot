@@ -73,6 +73,10 @@ const execute = async (interaction: CommandInteraction) => {
             })
             .setDescription(`Top ${masteries.length} for ${user.response.name}`)
             .setThumbnail(`${dragonIcon(user.response.profileIconId)}`)
+            .addFields({
+                name: "\u200B", 
+                value: "\u200B"
+            })
             .addFields(fields)
             .addFields({
                 name: "\u200B", 
