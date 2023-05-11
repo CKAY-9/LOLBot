@@ -4,7 +4,7 @@ import {
     EmbedBuilder, 
     SlashCommandBuilder 
 } from "discord.js";
-import { dragonIcon, errorEmbed, opGGLink, regionsToOption } from "../utils";
+import { convertQueueToValue, dragonIcon, errorEmbed, opGGLink, regionsToOption } from "../utils";
 import { leagueAPI } from "../league";
 import { Constants } from "twisted";
 
@@ -37,7 +37,7 @@ const execute = async (interaction: CommandInteraction) => {
                 fieldInfo.push(
                     {
                         name: "Queue",
-                        value: queueType.queueType
+                        value: convertQueueToValue(queueType.queueType)
                     },
                     {
                         name: "Rank",
@@ -49,7 +49,7 @@ const execute = async (interaction: CommandInteraction) => {
                     },
                     {
                         name: "Wins/Losses",
-                        value: `${queueType.wins}/${queueType.losses} (WR: ${queueType.wins / (queueType.losses >= 1 ? queueType.losses : 1)}%)`
+                        value: `${queueType.wins}/${queueType.losses} (WR: ${Math.round(queueType.wins / (queueType.wins + queueType.losses) * 100)}%)`
                     },
                     {
                         name: "\u200B", 
@@ -70,12 +70,6 @@ const execute = async (interaction: CommandInteraction) => {
             })
             .setDescription(`The current ranked season for ${user.response.name}`)
             .setThumbnail(`${dragonIcon(user.response.profileIconId)}`)
-            .addFields(
-                {
-                    name: "\u200B", 
-                    value: "\u200B"
-                }
-            )
             .addFields(fieldInfo)
             .setTimestamp()
             .setFooter({
@@ -85,7 +79,7 @@ const execute = async (interaction: CommandInteraction) => {
         await interaction.reply({embeds: [seasonEmbed]})
     } catch (ex) {
         console.log(ex);
-        await interaction.reply({embeds: [errorEmbed(interaction)]})
+        await interaction.reply({embeds: [errorEmbed(interaction, ex.body.status.message)]})
     }
 }
 

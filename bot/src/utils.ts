@@ -4,7 +4,7 @@ import {
     CommandInteraction,
 } from "discord.js";
 
-export const errorEmbed = (interaction: CommandInteraction) => {
+export const errorEmbed = (interaction: CommandInteraction, reason: string = "No reason specified") => {
     const errorEmbed = new EmbedBuilder()
         .setColor(0xFF0000)
         .setTitle("Error Executing Command!")
@@ -13,6 +13,12 @@ export const errorEmbed = (interaction: CommandInteraction) => {
             iconURL: interaction.client.user.avatarURL(),
             url: "https://github.com/Camerxxn/LoLBot"
         })
+        .addFields(
+            {
+                name: "Reason",
+                value: reason
+            }
+        )
         .setTimestamp()
         .setFooter({
             text: "Thanks for using LoLBot",
@@ -27,6 +33,13 @@ export const dragonIcon = (id: number): string => {
 
 export const opGGLink = (username: string, region: string): string => {
     return `https://www.op.gg/summoners/${region}/${username}`.replace(" ", "%20");
+}
+
+export const queueTypes = {
+    "RANKED_SOLO_5x5": "Ranked Solo/Duo"
+}
+export const convertQueueToValue = (queueType: string): string => {
+    return queueTypes[queueType] === undefined ? queueType : queueTypes[queueType];
 }
 
 export const regionsToOption = (o: SlashCommandStringOption): SlashCommandStringOption => {

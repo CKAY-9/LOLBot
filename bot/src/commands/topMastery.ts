@@ -18,7 +18,7 @@ import {
 import { Constants } from "twisted";
 
 const commandData = new SlashCommandBuilder()
-    .setName("topMastery")
+    .setName("top_mastery")
     .setDescription("Get the top five champions by mastery for a player.")
     .addStringOption((option) => {
         return option.setName("summoner_name")
@@ -43,7 +43,7 @@ const execute = async (interaction: CommandInteraction) => {
                 return 1;
             }
             return 0;
-        }).reverse().splice(0, mastery.response.length >= 4 ? 4 : mastery.response.length);
+        }).reverse().splice(0, mastery.response.length >= 5 ? 5 : mastery.response.length);
 
         // Create embed fields for each champion
         const fields: APIEmbedField[] = [];
@@ -71,13 +71,13 @@ const execute = async (interaction: CommandInteraction) => {
                 iconURL: interaction.client.user.avatarURL(),
                 url: "https://github.com/Camerxxn/LoLBot"
             })
-            .setDescription(`Top ${masteries} for ${user.response.name}`)
+            .setDescription(`Top ${masteries.length} for ${user.response.name}`)
             .setThumbnail(`${dragonIcon(user.response.profileIconId)}`)
+            .addFields(fields)
             .addFields({
                 name: "\u200B", 
                 value: "\u200B"
             })
-            .addFields(fields)
             .setTimestamp()
             .setFooter({
                 text: "Thanks for using LoLBot", 
@@ -86,7 +86,7 @@ const execute = async (interaction: CommandInteraction) => {
         await interaction.reply({embeds: [masteryEmbed]})
     } catch (ex) {
         console.log(ex);
-        await interaction.reply({embeds: [errorEmbed(interaction)]});
+        await interaction.reply({embeds: [errorEmbed(interaction, ex.body.status.message)]});
     }
 }
 

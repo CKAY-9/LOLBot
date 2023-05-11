@@ -45,6 +45,10 @@ const execute = async (interaction: CommandInteraction) => {
             .setThumbnail(`${dragonIcon(user.response.profileIconId)}`)
             .addFields(
                 {
+                    name: "\u200B", 
+                    value: "\u200B"
+                },
+                {
                     name: "Summoner Name", 
                     value: user.response.name
                 },
@@ -59,11 +63,7 @@ const execute = async (interaction: CommandInteraction) => {
                 {
                     name: "Profile Icon ID", 
                     value: user.response.profileIconId.toString()
-                },
-                {
-                    name: "\u200B", 
-                    value: "\u200B"
-                },
+                }
             )
             .setTimestamp()
             .setFooter({
@@ -73,7 +73,7 @@ const execute = async (interaction: CommandInteraction) => {
         await interaction.reply({embeds: [profileEmbed]})
     } catch (ex) {
         console.log(ex);
-        await interaction.reply({embeds: [errorEmbed(interaction)]});
+        await interaction.reply({embeds: [errorEmbed(interaction, ex.body.status.message)]});
     }
 }
 
