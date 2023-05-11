@@ -47,6 +47,9 @@ const execute = async (interaction) =>  {
             }
         }
 
+        const userChamp = match.response.participants.find((v) => v.summonerId === user.response.id);
+        const userChampData = await leagueAPI.DataDragon.getChampion(userChamp.championId);
+
         const matchEmbed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle(user.response.name + "'s Current Match")
@@ -65,7 +68,11 @@ const execute = async (interaction) =>  {
                 },
                 {
                     name: "Duration",
-                    value: `${Math.round(match.response.gameLength / 60)}mins ${match.response.gameLength % 60}secs`
+                    value: `${Math.round(match.response.gameLength / 60)}m${match.response.gameLength % 60}s`
+                },
+                {
+                    name: "Champion",
+                    value: userChampData.name
                 },
                 {
                     name: "Gamemode",
