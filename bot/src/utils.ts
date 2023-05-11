@@ -36,7 +36,8 @@ export const opGGLink = (username: string, region: string): string => {
 }
 
 export const queueTypes = {
-    "RANKED_SOLO_5x5": "Ranked Solo/Duo"
+    "RANKED_SOLO_5x5": "Ranked Solo/Duo",
+    "RANKED_FLEX_SR": "Ranked Flex SR"
 }
 export const convertQueueToValue = (queueType: string): string => {
     return queueTypes[queueType] === undefined ? queueType : queueTypes[queueType];

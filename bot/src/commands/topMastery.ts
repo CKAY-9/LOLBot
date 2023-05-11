@@ -12,9 +12,7 @@ import {
     opGGLink, 
     regionsToOption 
 } from "../utils";
-import {  
-    leagueAPI 
-} from "../league";
+import { leagueAPI } from "../league";
 import { Constants } from "twisted";
 
 const commandData = new SlashCommandBuilder()
