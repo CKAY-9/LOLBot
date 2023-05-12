@@ -17,7 +17,7 @@ LoLBot is a Discord bot built upon <a href="https://discord.js.org/">discord.js<
 
 If the player doesn't exist, in general or in the requested region, LoLBot will return an error.
 
-## Running LoLBot with NodeJS
+# Running LoLBot with NodeJS
 1. Clone this repository: `git clone https://github.com/Camerxxn/LOLBot.git`
 2. Navigate to `./bot` and create a new file called `.env`
 3. Create a discord bot (<a href="https://discordjs.guide/preparations/setting-up-a-bot-application.html">tutorial</a>)
@@ -35,7 +35,7 @@ RIOT_API_KEY=YOUR_API_KEY
 10. Finally, `npm run start`
 11. Your bot should be setup :)
 
-### Optional Frontend
+## Optional Frontend
 1. Navigate to `./frontend`
 2. Create a `.env` file
 3. Get your discord bot client ID and paste it into the `.env` file
@@ -46,7 +46,7 @@ DISCORD_INVITE=https://discord.com/api/oauth2/authorize?client_id=[YOUR_CLIENT_I
 5. Run `npm run build`
 6. Run `npm run start`
 
-## Running LoLBot with Docker
+# Running LoLBot with Docker
 1. Have docker on your machine
 2. Follow steps 1-7 from <a href="#running-lolbot-with-nodejs">Here</a>
 3. Follow steps 1-3 from <a href="#optional-frontend">Here</a>
