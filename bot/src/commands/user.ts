@@ -77,7 +77,7 @@ const execute = async (interaction: CommandInteraction) => {
         await interaction.reply({embeds: [profileEmbed]})
     } catch (ex) {
         console.log(ex);
-        await interaction.reply({embeds: [errorEmbed(interaction, ex.body.status.message)]});
+        await interaction.reply({embeds: [errorEmbed(interaction, ex.body.status.message)], ephemeral: true});
     }
 }
 

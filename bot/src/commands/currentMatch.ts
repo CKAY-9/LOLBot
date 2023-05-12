@@ -95,7 +95,7 @@ const execute = async (interaction) =>  {
         await interaction.reply({embeds: [matchEmbed]})
     } catch (ex) {
         console.log(ex);
-        await interaction.reply({embeds: [errorEmbed(interaction, ex.body.status.message)]});
+        await interaction.reply({embeds: [errorEmbed(interaction, ex.body.status.message)], ephemeral: true});
     }
 }
 
