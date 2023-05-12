@@ -3,7 +3,7 @@
  <h1>LoLBot</h1>
 </div>
 
-## About
+# About
 LoLBot is a Discord bot built upon <a href="https://discord.js.org/">discord.js</a> and the <a href="https://github.com/Sansossio/twisted">Twisted</a> wrapper for Riot API. It offers commands to view stats and information about a League of Legends player. *TFT support is not avaliable right now*
 
 ## Commands
